@@ -33,7 +33,7 @@ public class CardDataTests {
 
 
 
-        //Thread.sleep(10000);
+        //Thread.sleep(1000);
 
     }
 
