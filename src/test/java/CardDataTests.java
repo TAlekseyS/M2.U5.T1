@@ -30,7 +30,7 @@ public class CardDataTests {
         $("[placeholder=Город]").setValue("Казань");
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id='date'] input").setValue("15.08.2023");
-        $("[name=name]").setValue("Кирилл Костиев");
+        $("[name=name]").setValue("Кирилл Костив");
         $("[name=phone]").setValue("+77987897897");
         $("[class=checkbox__box]").click();
         $("[class=button__content]").click();
