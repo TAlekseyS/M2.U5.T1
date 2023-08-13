@@ -9,8 +9,8 @@ import org.openqa.selenium.Keys;
 import java.time.Duration;
 import java.util.Locale;
 
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -41,15 +41,20 @@ public class CardDataTests {
         $("[class=checkbox__box]").click();
         $("[class=button__content]").click();
         $(withText("Успешно")).shouldBe(visible, Duration.ofSeconds(15));
-        // $("[placeholder=Город]").setValue("Казань");
+        $("[data-test-id='success-notification'] .notification__content")
+                .shouldHave(exactText("Встреча успешно запланирована на " + firstMeetingDate))
+                .shouldBe(visible);
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id='date'] input").setValue(secondMeetingDate);
-
-        $("[class=button__content]").click();
-        $("[class=button__content]").click();
+        $(byText("Запланировать")).click();
+        $("[data-test-id='replan-notification'] .notification__content")
+         .shouldHave(text("У вас уже запланирована встреча на другую дату. Перепланировать?"))
+         .shouldBe(visible);
+        $(withText("Перепланировать")).click();
+        $("[data-test-id='success-notification'] .notification__content")
+                .shouldHave(exactText("Встреча успешно запланирована на " + secondMeetingDate))
+                .shouldBe(visible);
         $(withText("Успешно")).shouldBe(visible, Duration.ofSeconds(15));
-
-        //рабочий хардкодинг
 
     }
 
